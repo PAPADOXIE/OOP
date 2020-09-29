@@ -148,9 +148,9 @@ struct Set{
 
 };
 
-int main(){ //Main function
-    Set set1, set2, set3; //Create sets
-    set1.init(5); set2.init(5); set3.init(8); //Initialize sets
+int main(){ //Main Function
+    Set set1, set2, set3; //Create Sets
+    set1.init(5); set2.init(5); set3.init(8); //Initialize Sets
 
     //*Test Adding to Sets
     //First argument for add should be number of elements to add
