@@ -73,6 +73,31 @@ struct Bag{
     }
 };
 
-int main(){
-    
+int main(){//Main Function
+    Bag bag1, bag2, bag3; //Create Bags
+    bag1.init(5); bag2.init(5); bag3.init(8); //Initialize Bags
+
+    //*Test Adding to Bags
+    //First argument for add should be number of elements to add
+    std::cout<<"Bag1, Bag2, Bag3 in Order"<<std::endl;
+    bag1.add(3, 1, 4, 16); bag1.print();
+    bag2.add(5, 1, 3, 4, 8, 16); bag2.print();
+    bag3.add(8, 3, 2, 6, 5, 4, 4, 7, 8); bag3.print();
+    std::cout<<std::endl;
+
+    //*Test Merging of Bags
+    std::cout<<"Merger of Bag1 and Bag2"<<std::endl;
+    Bag merged = bag1.merge(bag2); merged.print();
+    std::cout<<std::endl;
+
+    //*Test Resizing of Bags
+    std::cout<<"Bag3 after Resizing"<<std::endl;
+    bag3.resize(5); bag3.print();
+    std::cout<<std::endl;
+
+    //*Test Whether one Bag Has All of the Contents of Another Bag
+    std::cout<<"Checking if Bag2 has all the contents of Bag1"<<std::endl;
+    std::cout<<bag2.has(bag1)<<std::endl;
+    std::cout<<std::endl;
+    return 0;
 }
