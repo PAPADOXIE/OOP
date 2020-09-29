@@ -35,8 +35,8 @@ struct Set{
         for(int i=0; i<argc; i++){
             temp = va_arg(elements, int);
             if(size<max_size && !is_exist(temp)){
-            data[size++] = temp;
-            added = true;
+                data[size++] = temp;
+                added = true;
             }
         }
         return added;
