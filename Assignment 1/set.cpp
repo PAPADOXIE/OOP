@@ -196,5 +196,7 @@ int main(){ //Main function
     std::cout<<set2.is_proper_subset(set1)<<std::endl;
     std::cout<<std::endl;
 
+    //Delete Sets
+    set1._delete(); set2._delete(); set3._delete(); Union._delete(); Intersection._delete(); Difference._delete(); Complement._delete();
     return 0;
 }
