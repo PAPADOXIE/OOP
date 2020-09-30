@@ -7,6 +7,7 @@ struct Set{
 
     void init(const int SIZE){ //Initialize the set with given max value
         data = (int*) malloc(SIZE * sizeof(int)); //Used malloc because realloc is easier than copying the whole set over
+        universal = (int*) malloc(0 * sizeof(int)); //Just to return a pointer we can use in realloc
         max_size = SIZE;
         size = 0;
         universal_size = 0;
@@ -113,7 +114,6 @@ struct Set{
         va_list sets;
         va_start(sets, argc);
         Set temp;
-        universal = (int*) malloc(0 * sizeof(int)); //Just to return a pointer we can use in realloc
 
         for(int i=0; i<argc; i++){
             temp = va_arg(sets, Set);
