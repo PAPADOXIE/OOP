@@ -17,17 +17,17 @@ class List{
     }
     
     void copy(const List& list){ //Helper function for copy constructor
-        list.num_elements;
-        construct(list.num_elements);
+        int max = list.size;
+        construct(max);
         memcpy(elements, list.elements, size);
-        num_elements = list.num_elements;
+        num_elements = max;
     }
     
-    bool is_exist(const char ELEMENT){ //Check if an element exists in the list or not
+    int is_exist(const char ELEMENT){ //Check if an element exists in the list or not
         for(int i=0; i<num_elements; i++){
-            if(ELEMENT==elements[i]) return true;
+            if(ELEMENT==elements[i]) return i;
         }
-        return false;
+        return -1;
     }
 
     public: //!PUBLIC
@@ -52,8 +52,8 @@ class List{
     
     //Operators
     List operator += (const List& list){ //Add elements of second List to first one
-        int index = size;
-        size = num_elements + list.size;
+        int index = size - 1;
+        size = size + list.size;
         num_elements = size;
         elements = (char*) realloc(elements, size * sizeof(char));
 
@@ -75,20 +75,23 @@ class List{
         return *this;
     }
 
-    List operator -= (List& list){ //Remove elements of second list in first list
-        
-        List newlist(num_elements);
-    
-            for(int i=0; i<num_elements; i++){
-                if(!list.is_exist(elements[i])){
-                    newlist.elements[newlist.num_elements++] = elements[i];
+    List operator -= (const List& list){ //Remove elements of second list in first list
+        int index, decrement = 0;
+
+        for(int i=0; i<list.size; i++){
+            index = is_exist(list.elements[i]);
+
+            if(index != -1){
+                decrement++;
+
+                for(int j=index; j<size-1; j++){
+                    elements[j] = elements[j+1];
                 }
             }
-        
-        size = newlist.size;
-        num_elements = newlist.num_elements;
-        memcpy(elements, newlist.elements, num_elements);
-        
+        }
+
+        num_elements = num_elements - decrement;
+        shrink(decrement);
         return *this;
     }
     
@@ -98,21 +101,15 @@ class List{
         return newlist;
     }
 
-    List operator - (List& list){ //Add elements of first list except the ones in the second list
-        List newlist(num_elements);
-        
-        for(int i=0; i<num_elements; i++){
-            if(!list.is_exist(elements[i])){
-                newlist.elements[newlist.num_elements++] = elements[i];
-            }
-        }
-        
+    List operator - (const List& list){ //Add elements of first list except the ones in the second list
+        List newlist(*this);
+        newlist -= list;
         return newlist;
     }
 
     friend ostream& operator << (ostream& out, const List& list){ //Print list
 
-        if(list.num_elements == 0){
+        if(list.num_elements == 0 || list.size == 0){
             out << "EMPTY LIST" << endl;
 
         }else{ 
@@ -129,8 +126,7 @@ class List{
     //Misc
     void shrink(int decrement){
         size = size - decrement;
-        num_elements = num_elements - decrement;
-        elements = (char*) realloc(elements, num_elements * sizeof(char));
+        elements = (char*) realloc(elements, size * sizeof(char));
     }
     
     //Destructor
@@ -144,7 +140,6 @@ void menu(List** strings, int op){
 
     int i, i2, i3, i_param;
     char* c_param;
-    char c;
 
     switch(op){
         case 1:
@@ -164,12 +159,12 @@ void menu(List** strings, int op){
 
         case 3:
             cin >> i >> i_param;
-            strings[i] = new List(*strings[i_param]);
+            strings[i] = strings[i_param];
             break;
 
         case 4:
             cin >> i >> i2;
-            *strings[i] = *strings[i2];
+            strings[i] = strings[i2];
             break;
 
         case 5:
@@ -188,25 +183,23 @@ void menu(List** strings, int op){
             break;
 
         case 8:
-            cin >> i >> i2;
-            cout << *strings[i] + *strings[i2];
+            cin >> i >> i2 >> i3;
+            *strings[i3] = *strings[i] + *strings[i2];
             break;
 
         case 9:
-            cin >> i >> i2;
-            cout << *strings[i] - *strings[i2];
+            cin >> i >> i2 >> i3;
+            *strings[i3] = *strings[i] - *strings[i2];
             break;
 
         case 10:
             cin >> i;
-            if(strings[i]==NULL){
-                cout << "NO OBJECT" << endl;
-            }else cout << *strings[i];
+            cout << strings[i];
             break;
         
         case 11:
-            cin >> i >> c;
-            *strings[i] += c;
+            cin >> i >> *c_param;
+            strings[i] += *c_param;
             break;
     }
 
@@ -215,17 +208,12 @@ void menu(List** strings, int op){
 int main(){
 
     int ops, op;
-    int num_lists = 2;
-    List** strings = (List**) malloc(num_lists * sizeof(List*));  
-    
-    for(int i=0; i<num_lists; i++){
-        *strings = NULL;
-    }
+    List** strings = (List**) malloc(2 * sizeof(List*));  
+    memset(strings, NULL, sizeof(strings));
 
     cin >> ops;
 
     for(int i=0; i<ops; i++){
-        cin >> op;
         menu(strings, op);
     }
 
