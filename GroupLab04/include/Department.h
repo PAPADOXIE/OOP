@@ -9,7 +9,7 @@ protected:
     Employee** DIO;
 public:
 Department(std::string Title,int no_of_possible_Employees);
-void addEmployee(Employee Jojo,int Type);
+void addEmployee(Employee *Jojo,int Type);
 void modifyEmployee(int Employee_No,int Modified_Salary);
 void calcSalary(int Employee_No);
 void calcAllSalary();
