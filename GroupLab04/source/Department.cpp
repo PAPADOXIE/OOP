@@ -21,6 +21,6 @@ void Department::addEmployee(Employee *Jojo,int Type){
         DIO[current_no_of_Employees++]=Jojo;
     }
 }
-void modifyEmployee(int Employee_No,int Modified_Salary){
-    
+void Department::modifyEmployee(int Employee_No,int Modified_Salary){
+    DIO[Employee_No]->setSal(Modified_Salary);
 }

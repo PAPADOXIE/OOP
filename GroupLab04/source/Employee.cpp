@@ -11,6 +11,10 @@ int Employee::calcSal(){
     return salary;
 }
 
+void Employee::setSal(int salary){
+    this->salary=Sal;
+}
+
 std::ostream &operator << (std::ostream &out, Employee *employee){
     out << "Name: " << employee->fName << " " << employee->sName;
     out << "\nSalary: " << employee->calcSal() << '\n';
