@@ -12,7 +12,7 @@ int Employee::calcSal(){
 }
 
 void Employee::setSal(int salary){
-    this->salary=Sal;
+    this->salary=salary;
 }
 
 std::ostream &operator << (std::ostream &out, Employee *employee){

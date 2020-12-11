@@ -14,4 +14,5 @@ void modifyEmployee(int Employee_No,int Modified_Salary);
 void calcSalary(int Employee_No);
 void calcAllSalary();
 void deleteEmployee(int Employee_no);
+friend std::ostream &operator <<(std::ostream &out, Department &jotaro);
 };
