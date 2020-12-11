@@ -25,11 +25,11 @@ void Department::modifyEmployee(int Employee_No,int Modified_Salary){
     DIO[Employee_No]->setSal(Modified_Salary);
 }
 void Department::calcSalary(int Employee_No){
-    std::cout<<"Salary is "<<DIO[Employee_No]->calcSal()<<"\n";
+    std::cout<<"Employee No "<<Employee_No<<"'s Salary is "<<DIO[Employee_No]->calcSal()<<"\n";
 }
 void Department::calcAllSalary(){
     for(int i =0;i<current_no_of_Employees;i++){
-        std::cout<<"Employee No "<<i<<"'s Salary is "<<DIO[i]->calcSal()<<"\n";
+        calcSalary(i);
     }
 }
 void Department::deleteEmployee(int Employee_no){
