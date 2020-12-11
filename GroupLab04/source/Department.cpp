@@ -24,3 +24,19 @@ void Department::addEmployee(Employee *Jojo,int Type){
 void Department::modifyEmployee(int Employee_No,int Modified_Salary){
     DIO[Employee_No]->setSal(Modified_Salary);
 }
+void Department::calcSalary(int Employee_No){
+    std::cout<<"Salary is "<<DIO[Employee_No]->calcSal()<<"\n";
+}
+void Department::calcAllSalary(){
+    for(int i =0;i<current_no_of_Employees;i++){
+        std::cout<<"Employee No "<<i<<"'s Salary is "<<DIO[i]->calcSal()<<"\n";
+    }
+}
+void Department::deleteEmployee(int Employee_no){
+    delete DIO[Employee_no];
+    DIO[Employee_no]=NULL;
+    for(int i=Employee_no;i<current_no_of_Employees-1;i++){
+        DIO[i]=DIO[i+1];
+    }
+    current_no_of_Employees--;
+}
