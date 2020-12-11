@@ -2,10 +2,12 @@
 #include "Employee.h"
 #include <string>
 class Department{
+protected:
     std::string Title;
     int no_of_possible_Employies;
     int current_no_of_Employies;
     Employee** DIO;
+public:
 Department(std::string Title,int no_of_possible_Employies);
 void addEmployee(Employee Jojo,int Type);
 void modifyEmployee(int Employee_No,int Modified_Salary);
