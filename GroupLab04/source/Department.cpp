@@ -40,3 +40,7 @@ void Department::deleteEmployee(int Employee_no){
     }
     current_no_of_Employees--;
 }
+std::ostream &operator <<(std::ostream &out, Department &jotaro){
+    out<<jotaro.Title<<std::endl;
+    jotaro.calcAllSalary();
+}
